@@ -59,9 +59,7 @@ def get_popularity_by_artist(token, artist):
 
 def quiz_generator(token,genre,year_span,difficulty):
     Quiz_results = []
-    #genre = "pop" #Select between rock,pop,country
-    #year_span = "2000-2010" #During which year span should the song have been released in?
-    #difficulty = "Medium" #Easy,Medium,Hard
+    
     artist_list = f"{genre}_artists"
     artist_list = globals()[artist_list]
     info = {}
@@ -73,16 +71,15 @@ def quiz_generator(token,genre,year_span,difficulty):
         info[num] = {}
         info[num]["artist"] = artists
         
-        #print(get_popularity_by_artist(token,artists))
+        
         songs = get_songs_by_artist(token, artist_id)
         song_list = []
         for idx, song in enumerate(songs):
-            #print(f"{idx + 1}, {song["name"]}, {song['album']['release_date']}")
-            #print(int(song['album']['release_date'][:4]))
+            
             song_list.append([f"{song["name"]}, {song['album']['release_date'][0:4]}"])
             
         
-            #info[num]["release date"] = song['album']['release_date']
+            
         info[num]["songs"] = song_list
         
         num += 1
@@ -130,24 +127,13 @@ def quiz_generator(token,genre,year_span,difficulty):
 
     for idx, res in enumerate(Quiz_results):
         print(f"{idx+1} : {res}")
-    #print(info[1]["songs"][0][0][-10:-6])
-    #url = "https://api.spotify.com/v1/search"
-    #headers = get_auth_header(token)
-    #query = f"?q={artist_name}&type=artist&limit=1"
+    
 
 
 
 token = get_token()
-#result = search_for_artist(token, "ACDC")
-#print(result)
-#artist_id = result["id"]
-#"print(result["name"])
-#songs = get_songs_by_artist(token, artist_id)
 
-#popularity = get_popularity_by_artist(token,"ACDC")
-#print(popularity)
-#print(songs)
-#for idx, song in enumerate(songs):
-#    print(f"{idx + 1}, {song['album']['release_date']}")
-
+#Write "rock,pop,country" to get a genre
+#Write a year span of which era the music should come from
+#Write the difficulty of the quiz. Choose from "Easy,Medium,Hard"
 quiz_generator(token,"pop","2010-2020","Easy")
